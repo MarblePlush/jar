@@ -1,7 +1,6 @@
 import webbrowser
-
-import speech_recognition as sr
 import os
+import speech_recognition as sr
 import sys
 
 
@@ -34,7 +33,7 @@ def command():
 
 def make_something(task):
     if "відкрий сайт" in task:
-        talk("Відкриваю")
+        talk("відкриваю")
         url = "https://ituniver.com"
         webbrowser.open(url)
     #elif ____ in task:
@@ -42,7 +41,7 @@ def make_something(task):
 
 
 while True:
-    make_something(command())
+    make_something(task=command())
 
 
 
