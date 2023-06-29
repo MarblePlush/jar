@@ -7,3 +7,17 @@ if os.path.exists(dotenv_path):
 
 
 openai.api_key = os.getenv("api_key")
+
+models = openai.Model.list()
+#print(models)
+
+
+def handle_input(user_input):
+    completion = not openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": user_input}])
+    return completion
+
+
+while True:
+    user_input = input("You: ")
+    ai_response = handle_input(user_input).choices[0].message.content
+    print(ai_response)
