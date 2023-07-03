@@ -3,6 +3,20 @@ import os
 import speech_recognition as sr
 import sys
 
+import openai
+
+from dotenv import load_dotenv as ld
+
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+if os.path.exists(dotenv_path):
+    ld(dotenv_path)
+
+openai.api_key = os.getenv("api_key")
+
+def handle_input(user_input):
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": user_input}])
+    return completion
 
 def talk(words):
     print(words)
@@ -32,12 +46,20 @@ def command():
 
 
 def make_something(task):
-    if "відкрий сайт" in task:
+    if "відкрий" and  "сайт" in task:
         talk("відкриваю")
         url = "https://ituniver.com"
         webbrowser.open(url)
-    #elif ____ in task:
-    #       talk()
+    elif "імʼя" and "твоє"in task:
+        talk("My name is JARVIS")
+
+    elif "стоп" in task
+        talk("Goodbye")
+        sys.exit()
+
+    else:
+        ai_response = handle_input(task).choices[0].message.content
+        talk(ai_response)
 
 
 while True:
